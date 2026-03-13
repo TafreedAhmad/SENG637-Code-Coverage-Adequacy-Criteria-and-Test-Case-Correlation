@@ -147,14 +147,14 @@ Text…
     <tr><td>max(double, double)</td><td>Zoe</td></tr>
     <tr><td>constrain(double)</td><td>Zoe</td></tr>
     <tr><td>isNaNRange()</td><td>Zoe, Heena</td></tr>
-    <tr><td>toString()</td><td></td></tr>
-    <tr><td>hashCode()</td><td></td></tr>
+    <tr><td>toString()</td><td>Tafreed</td></tr>
+    <tr><td>hashCode()</td><td>Tafreed</td></tr>
     <tr><td>equals(Range)</td><td>Heena</td></tr>
     <tr><td>shiftWithNoZeroCrossing()</td><td>Heena</td></tr>
-    <tr><td>shift(Range, double)</td><td></td></tr>
-    <tr><td>scale(Range, double)</td><td></td></tr>
-    <tr><td>expandToInclude(Range, double)</td><td></td></tr>
-    <tr><td>combine(Range, Range)</td><td></td></tr>
+    <tr><td>shift(Range, double)</td><td>Tafreed</td></tr>
+    <tr><td>scale(Range, double)</td><td>Tafreed</td></tr>
+    <tr><td>expandToInclude(Range, double)</td><td>Tafreed</td></tr>
+    <tr><td>combine(Range, Range)</td><td>Tafreed</td></tr>
     <tr><td>expand(Range, double, double)</td><td>Heena</td></tr>
     <tr><td colspan="2" style="text-align:center"><strong>DataUtilities</strong></td></tr>
     <tr><td>equal(double[][], double[][])</td><td>Tafreed</td></tr>
