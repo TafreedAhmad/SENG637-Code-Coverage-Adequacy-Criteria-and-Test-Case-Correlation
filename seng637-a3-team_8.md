@@ -122,7 +122,7 @@ Variable: upper
 
 #### **1\. Top-Down Instrumentation and Gap Analysis**
 
-This strategy focuses on using the coverage tool (like EclEmma) as a diagnostic "map" to identify unexplored regions of the code.
+This strategy focuses on using the coverage tool (EclEmma) as a diagnostic "map" to identify unexplored regions of the code.
 
 * **Initial Baseline:** Run the existing test suite from Assignment \#2 against DataUtilities and Range to establish a baseline.  
 * **Visual Identification:** Use the color-coded feedback in the Eclipse editor (Green for covered, Yellow for partial, Red for uncovered) to pinpoint specific if-else blocks, switch cases, and for/while loops that were never entered.  
