@@ -148,7 +148,7 @@ While the tool handles control flow, this strategy uses the **manual DU-pair ana
 
 Test cases that was designed using coverage information, and how they have increased code coverage:
 
-#### 1.Class: DataUtilities Method: calculateColumnTotal(Values2D, int)
+#### 1. Class: DataUtilities Method: calculateColumnTotal(Values2D, int)
 
 The test case `calculateColumnTotalWithAllNullValues` was strategically designed to target a specific conditional branch within the `DataUtilities` class that handles null data entries in a dataset.
 
