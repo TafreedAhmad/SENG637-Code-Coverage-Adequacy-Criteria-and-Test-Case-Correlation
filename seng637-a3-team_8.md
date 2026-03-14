@@ -149,11 +149,59 @@ While the tool handles control flow, this strategy uses the **manual DU-pair ana
 
 Test cases that was designed using coverage information, and how they have increased code coverage:
 
-1. **equals(Object)**: The test testEqualsObjectNotRange() verifies the behavior of the equals method when the compared object is not an instance of a Range. Here in this test, a Range object is compared with a String and the expected result is false. This test increases coverage by executing the branch in the equals method that confirms whether the object is an instance of Range. Without this test , the type checking branch can not be exercised.
-2. **combineIgnoringNaN(Range, Range)**: The test testCombineIgnoringNaN_Range1Null() verifies the behaviour when the first range parameter is null and the method should return the second valid range. This test confirms that the input value is expected for null branch handling.The test increases coverage of conditional logic that validates method inputs.
-3. **isNaNRange()**: The test testCombineIgnoringNaN_bothNaNBounds() creates two ranges where both upper and lower bound are NaN. When passed to combineIgnoringNaN the method internally calls isNaNRange() method to detect invalid ranges. This test ensures that the branch is executed where both ranges are considered NaN and increases coverage for both combineIgnoringNaN and the internal helper method is isNaNRange().
-4. **shiftWithNoZeroCrossing(double, double)**: The test testShiftPositiveCrossZero() confirms that when shifting a positive range by a negative range delta that would normally cross zero. Since the zero crossing is disabled in this case, the value is clamped to zero. This test increases the branch coverage for conditional logic that restricts values from crossing zero when shifting ranges.
-5. **expand(Range, double, double)**: The test testExpandBoundCross() evaluates the case where large negative margins cause calculated lower bound to exceed the upper bound. The implementation adjusts both bounds to midpoint when this occurs. This test improves coverage by executing the conditional branch that handles invalid expansion scenarios where the computed bounds cross.
+#### **1\. contains(double value)**
+
+* **Analysis**: Coverage reports initially flagged the final return statement in yellow.  
+* **Findings**: We identified this as an **infeasible path** caused by code redundancy: if value \>= lower is true and value \<= upper is false, the logic is caught by a preceding if (value \> upper) check.  
+* **Result**: Despite testing with Double.NaN to attempt a False result on the first condition, the path remains yellow as it is logically unreachable in the current implementation.
+
+#### **2\. isNaNRange()**
+
+* **Test Case**: testIsNaNRange\_OnlyUpperIsNaN().  
+* **Gap Identified**: The method uses a single && condition. Initial tests only covered True && True and False && False states, leaving the statement partially uncovered.  
+* **Coverage Improvement**: The addition of the True && False case successfully achieved full coverage.
+
+| Counter | Coverage (Before) | Coverage (After) |
+| :---- | :---- | :---- |
+| **Branches** | 75% | **100%** |
+| **Lines** | 100% | 100% |
+| **Methods** | 100% | 100% |
+
+#### **3\. equals(Object obj)**
+
+* **Test Case**: equals\_DifferentObject\_ShouldReturnFalse().  
+* **Gap Identified**: Analysis showed the type-check block (\!(obj instanceof Range)) was never executed because we forgot to test the parameter against a non-Range object.  
+* **Coverage Improvement**: Comparing a Range object with a String validated the error-handling branch.
+
+| Counter | Coverage (Before) | Coverage (After) |
+| :---- | :---- | :---- |
+| **Branches** | 83.3% | **100%** |
+| **Lines** | 87.5% | **100%** |
+| **Methods** | 100% | 100% |
+
+#### **4\. expand(Range range, double lowerMargin, double upperMargin)**
+
+* **Test Case**: testExpandNegativeScale().  
+* **Gap Identified**: The conditional block handling cases where lower \> upper remained unexercised.  
+* **Coverage Improvement**: We used large negative margins to force the bounds to cross, triggering the internal midpoint adjustment logic.
+
+| Counter | Coverage (Before) | Coverage (After) |
+| :---- | :---- | :---- |
+| **Branches** | 50% | **100%** |
+| **Lines** | 75% | **100%** |
+| **Methods** | 100% | 100% |
+
+#### **5\. scale(Range base, double factor)**
+
+* **Test Case**: scale\_NegativeFactor\_ShouldThrowException().  
+* **Gap Identified**: The exception-handling branch for negative scaling factors (factor \< 0) was missing from the initial test suite.  
+* **Coverage Improvement**: Providing a negative factor ensured the IllegalArgumentException was thrown and the branch was fully covered.
+
+| Counter | Coverage (Before) | Coverage (After) |
+| :---- | :---- | :---- |
+| **Branches** | 50% | **100%** |
+| **Lines** | 80% | **100%** |
+| **Methods** | 100% | 100% |
 
 # 5 Detailed Report of the Coverage Achieved of each Class and Method 
 
