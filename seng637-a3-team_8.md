@@ -276,8 +276,8 @@ This measures the percentage of methods (functions) in your codebase that have b
 
 # 9 Any difficulties encountered, challenges overcome, and lessons learned from performing the lab
 
-Given we have access to the source code and in the source code, there is an infeasible path / Dead Code block / section specially in DataUtilities class. It is a bit confusing if we will fix that or leave it in. But we believe that as a unit tester coder, when you have access to the code, it is important to keep it as short and simple and also keep it clean. Unit test cases based on the source code are worked on by the developers that have the right to optimize the code and therefore we must optimize it whenever possible and alway avoid having clutters.
+We've identified dead code in the DataUtilities class. Given that we are both testing and have access to the source, we should take initiative and follow 'Clean Code' principles and remove these infeasible paths. Optimizing the code now prevents unnecessary clutter and keeps the project structure lean. Also, it helps to keep the diagram to be provided which is the Data Flow Diagram (DFG) clean.
 
 # 10 Comments/feedback on the lab itself
 
-Text…
+Updating the lab to use IntelliJ, Maven, and JaCoCo would better align the curriculum with current industry standards.
