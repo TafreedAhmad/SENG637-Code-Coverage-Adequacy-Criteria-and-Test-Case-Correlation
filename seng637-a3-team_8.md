@@ -115,11 +115,35 @@ Variable: upper
 | testContains\_ValueInside() | 1 → 2 → 3 → 4  | DU1, DU2, DU3, DU4, DU5, DU6, DU7, DU8 |
 | testContains\_NaNValue() | 1 → 2 → 3  | DU1, DU2, DU3, DU5, DU6, DU7 |
 
-# DU-pair coverage \= DU covered/Total DU \= 8/8 \= 100%
+##### DU-pair coverage \= DU covered/Total DU \= 8/8 \= 100%
 
 # 3 A detailed description of the testing strategy for the new unit test
 
-Text…
+
+#### **1\. Top-Down Instrumentation and Gap Analysis**
+
+This strategy focuses on using the coverage tool (like EclEmma) as a diagnostic "map" to identify unexplored regions of the code.
+
+* **Initial Baseline:** Run the existing test suite from Assignment \#2 against DataUtilities and Range to establish a baseline.  
+* **Visual Identification:** Use the color-coded feedback in the Eclipse editor (Green for covered, Yellow for partial, Red for uncovered) to pinpoint specific if-else blocks, switch cases, and for/while loops that were never entered.  
+* **Targeted Expansion:** Instead of writing random tests, the team specifically designs inputs that satisfy the Boolean conditions required to enter "Red" lines of code. For example, if a null check in calculateColumnTotal is red, a new test case passing a null dataset is explicitly created.  
+* **Goal:** Efficiently bridge the gap between the baseline coverage and the 90%/70%/60% targets by only writing tests for missing paths.
+
+#### **2\. Boundary and Branch Logic Mapping**
+
+This strategy targets **Branch and Condition coverage** specifically, ensuring that every logical decision point is evaluated for both true and false outcomes.
+
+* **Logic Decomposition:** For complex methods with nested logic (e.g., Range.intersects), the team maps out the predicates. If a condition is (a && b), the strategy involves creating four test cases to cover all combinations of the truth table.  
+* **Edge Case Integration:** By looking at the source code, the team identifies "hidden" boundaries that weren't obvious in the Javadoc—such as specific integer overflows or internal array limits—and writes tests to hit those exact boundaries.  
+* **Redundancy Reduction:** If multiple existing tests hit the same branch, this strategy allows the team to refactor or focus efforts elsewhere, ensuring that every new test added contributes a unique "edge" to the control flow graph.
+
+#### **3\. Data-Flow Driven Test Design (Manual Integration)**
+
+While the tool handles control flow, this strategy uses the **manual DU-pair analysis** required in Section 3.2 to inform the creation of unit tests.
+
+* **Def-Use Tracking:** For DataUtilities.calculateColumnTotal, the team manually identifies where variables (like total or row) are defined and where they are used.  
+* **Path Selection:** The strategy involves designing test cases that force the execution to travel from a specific **Definition** to every possible **Use**. For example, ensuring that a variable defined before a loop is correctly used inside the loop and also correctly handled if the loop is skipped entirely (zero iterations).  
+* **Verification:** This manual strategy acts as a "double-check" for the automated tools, ensuring that the tests aren't just hitting lines of code, but are actually exercising the lifecycle of the data within the application.
 
 # 4 High Level Description of Five Selected Test Cases 
 
