@@ -12,7 +12,7 @@
 (Note that some labs require individual reports while others require one report
 for each group. Please see each lab document for details.)
 
-# 1 Introduction
+## 1 Introduction
 
 The primary objective of this laboratory assignment is to explore the concepts of white-box testing and test adequacy through the application of code coverage metrics. While the previous assignment focused on requirements-based (black-box) testing, this phase shifts the focus toward the internal structure of the software to ensure that the test suite comprehensively exercises the source code.
 
@@ -32,8 +32,7 @@ The core goals of this activity include:
 ### 1.2 Methodology
 The team followed a structured approach beginning with the instrumentation of the original test suite developed in Assignment #2. Upon identifying coverage gaps, we employed a logic-driven strategy to craft new test inputs that force execution through previously unvisited code paths, such as exception handlers and complex conditional blocks. This process highlights the trade-offs between testing based purely on user requirements versus testing based on the "hidden" internal logic of the developer's implementation.
 
-# 2 Manual Data-Flow Coverage Calculations
-
+## 2 Manual Data-Flow Coverage Calculations
 
 ### Method 1: DataUtilities.calculateColumnTotal(Values2D data, int column) 
 #### i. Data Flow Graph (DFG)
@@ -117,7 +116,7 @@ Variable: upper
 
 ##### DU-pair coverage \= DU covered/Total DU \= 8/8 \= 100%
 
-# 3 A detailed description of the testing strategy for the new unit test
+## 3 A detailed description of the testing strategy for the new unit test
 
 
 #### **1\. Top-Down Instrumentation and Gap Analysis**
@@ -145,7 +144,7 @@ While the tool handles control flow, this strategy uses the **manual DU-pair ana
 * **Path Selection:** The strategy involves designing test cases that force the execution to travel from a specific **Definition** to every possible **Use**. For example, ensuring that a variable defined before a loop is correctly used inside the loop and also correctly handled if the loop is skipped entirely (zero iterations).  
 * **Verification:** This manual strategy acts as a "double-check" for the automated tools, ensuring that the tests aren't just hitting lines of code, but are actually exercising the lifecycle of the data within the application.
 
-# 4 High Level Description of Five Selected Test Cases 
+## 4 High Level Description of Five Selected Test Cases 
 
 Test cases that was designed using coverage information, and how they have increased code coverage:
 
@@ -203,17 +202,20 @@ Test cases that was designed using coverage information, and how they have incre
 | **Lines** | 80% | **100%** |
 | **Methods** | 100% | 100% |
 
-# 5 Detailed Report of the Coverage Achieved of each Class and Method 
+## 5 Detailed Report of the Coverage Achieved of each Class and Method 
 
 ### **Range class:**
 
 ![DataUtilities_LineCoverage](./assets/Range_LineCoverage.png)
+
 *Figure: Line Coverage*
 
 ![DataUtilities_LineCoverage](./assets/Range_BranchCoverage.png)
+
 *Figure: Branch Coverage*
 
 ![DataUtilities_LineCoverage](./assets/Range_MethodCoverage.png)
+
 *Figure: Method Coverage*
 
 ---
@@ -222,19 +224,22 @@ Test cases that was designed using coverage information, and how they have incre
 ### **DataUtilities class:**
 
 ![DataUtilities_LineCoverage](./assets/calculateColumnTotal_coveredLines.png)
+
 *Figure: Line Coverage*
 
 ![DataUtilities_BranchCoverage](./assets/calculateColumnTotal_coveredBranches.png)
+
 *Figure: Branch Coverage*
 
 ![DataUtilities_MethodCoverage](./assets/calculateColumnTotal_coveredMethods.png)
+
 *Figure: Method Coverage*
 
-# 6 Pros and Cons of coverage tools used and Metrics Utilized
+## 6 Pros and Cons of coverage tools used and Metrics Utilized
 
-## **Coverage Tool \- EclEmma**
+### **Coverage Tool \- EclEmma**
 
-### **Pros of Using EclEmma**
+#### **Pros of Using EclEmma**
 
 * **Fast Feedback Loop:** EclEmma brings coverage analysis directly into the workbench. You can launch tests in "**Coverage mode**" just as easily as you would Run or Debug, with results appearing immediately after the test run.  
 * **Intuitive Visual Highlighting:** It features **source code highlighting** that colors your lines: **Green** for fully covered, **Yellow** for partially covered (e.g., one branch of an if-statement), and **Red** for no coverage.  
@@ -243,13 +248,14 @@ Test cases that was designed using coverage information, and how they have incre
 * **Session Management:** You can **merge multiple coverage sessions** (e.g., combining unit and integration test results) to see the total coverage across different test suites.  
 * **Seamless Integration:** It supports all standard Eclipse launch types, including **JUnit**, **TestNG**, and local Java applications. It also allows for importing/exporting JaCoCo execution data (\*.exec) for use with CI/CD tools like SonarQube.
 
-### **Cons of Using EclEmma**
+#### **Cons of Using EclEmma**
 
 * **Performance Impact:** Coverage runs can be significantly **slower than standard runs**, especially when profiling large test suites or enterprise-scale monorepos, as the tool must track every instruction.  
 * **Limited Language Support:** EclEmma is strictly for **Java-based** languages (like Java and Scala). It does not support other languages within Eclipse, such as C++ or JavaScript.  
 * **IDE Dependency:** While the underlying JaCoCo engine is flexible, the EclEmma plugin is specifically for **interactive, local developer use**. For automated builds, you must still configure separate integrations like the JaCoCo Maven or Gradle plugins.  
 * **False Sense of Security:** Like all coverage tools, it measures **code execution**, not **test quality**. High coverage does not guarantee that the logic is correct or that the tests actually assert the right outcomes.  
 * **Complex Scenarios:** Some users report discrepancies when working with **multi-module Maven projects**, where tests in one module cover classes in another; this often requires manual configuration to merge execution data correctly.
+  
 ### **Metrics**
 
 #### **1\. Line Coverage**
@@ -287,21 +293,17 @@ This measures the percentage of methods (functions) in your codebase that have b
   * **Lack of Depth:** A method is "covered" even if the test only enters the first line and then returns. It says nothing about the quality of the testing *inside* the function.  
   * **Vulnerable to "Liar" Tests:** A single integration test that triggers many methods can result in high method coverage while ignoring the internal logic of those methods.
 
-
-# 7 A comparison on the advantages and disadvantages of requirements-based test generation and coverage-based test generation.
+## 7 Comparison on the advantages and disadvantages of requirements-based test generation and coverage-based test generation.
 
 #### Requirements-based:
 **Pros:** Assesses the software from the user's perspective, making it very effective at identifying missing functional requirements. Does not require understanding complex source code, enabling testers to focus on behaviour rather than implementation.
 **Cons:** Incapable of uncovering hidden bugs.
 
-
 #### Coverage-based :
 **Pros:** It forces testers to examine every line of code and every conditional branch.
 **Cons:** Getting 100% coverage is time-consuming and often leads to wasting time on infeasible paths
 
-
-
-# 8 A discussion on how the team work/effort was divided and managed
+## 8 Team Work/Effort Division and Management
 
 <table>
   <tr>
@@ -346,10 +348,12 @@ This measures the percentage of methods (functions) in your codebase that have b
 </table>
 
 
-# 9 Any difficulties encountered, challenges overcome, and lessons learned from performing the lab
+## 9 Difficulties encountered, challenges overcome, and lessons learned from performing the lab
 
 We've identified dead code in the DataUtilities class. Given that we are both testing and have access to the source, we should take initiative and follow 'Clean Code' principles and remove these infeasible paths. Optimizing the code now prevents unnecessary clutter and keeps the project structure lean. Also, it helps to keep the diagram to be provided which is the Data Flow Diagram (DFG) clean.
 
-# 10 Comments/feedback on the lab itself
+The Def-Use Pairs, DU path and Data Flow Diagram are good concepts to aid in visualize the completeness of the test cases.
+
+## 10 Comments/feedback on the lab itself
 
 Updating the lab to use IntelliJ, Maven, and JaCoCo would better align the curriculum with current industry standards.
