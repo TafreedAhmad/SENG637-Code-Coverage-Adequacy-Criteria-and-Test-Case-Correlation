@@ -148,11 +148,30 @@ While the tool handles control flow, this strategy uses the **manual DU-pair ana
 
 Test cases that was designed using coverage information, and how they have increased code coverage:
 
-#### **1\. contains(double value)**
+#### 1.Class: DataUtilities Method: calculateColumnTotal(Values2D, int)
 
-* **Analysis**: Coverage reports initially flagged the final return statement in yellow.  
-* **Findings**: We identified this as an **infeasible path** caused by code redundancy: if value \>= lower is true and value \<= upper is false, the logic is caught by a preceding if (value \> upper) check.  
-* **Result**: Despite testing with Double.NaN to attempt a False result on the first condition, the path remains yellow as it is logically unreachable in the current implementation.
+The test case `calculateColumnTotalWithAllNullValues` was strategically designed to target a specific conditional branch within the `DataUtilities` class that handles null data entries in a dataset.
+
+* **Scenario:** A 2x1 grid where the `rowCount` is 2, but every cell in the specified column contains a `null` value instead of a `Number` object.  
+* **Gap Identified:** In initial test runs with valid numeric data, the `if (n != null)` condition always evaluates to True. This results in a "partial coverage" or yellow highlight in EclEmma, as the branch that skips the addition when `n` is null remains unexercised.  
+* **Coverage Impact:** \* **Branch Coverage:** This test forces the `if (n != null)` statement to evaluate to False. By doing so, it ensures the logic correctly bypasses the summation for null entries, reaching 100% branch coverage for the loop’s internal decision logic.  
+  * **Logic Validation:** It confirms that the method is robust enough to handle empty data points without throwing a `NullPointerException` or incorrectly modifying the `total`.
+
+Before adding additional test cases, this is how it looked when running the coverage tool:
+
+| Counter | Coverage |
+| ----- | ----- |
+| Branches | 75 % |
+| Lines | 100 % |
+| Methods | 100% |
+
+With the addition of this test case, we see improvements in the branch coverage counter:
+
+| Counter | Coverage |
+| ----- | ----- |
+| Branches | 100 % |
+| Lines | 100 % |
+| Methods | 100% |
 
 #### **2\. isNaNRange()**
 
